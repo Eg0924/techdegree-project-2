@@ -6,6 +6,7 @@ FSJS Project 2 - Data Pagination and Filtering
 // Array of student objects
 const data = [
   {
+
     name: {
       title: "Miss",
       first: "Ethel",
@@ -25,7 +26,7 @@ const data = [
   {
     name: {
       title: "Mrs",
-      first: "Lorraine",
+      first: "Lorrai11ne",
       last: "Lynch",
     },
     email: "lorraine.lynch@example.com",
