@@ -38,7 +38,7 @@ function showPage(list, page) {
          const studentItem = `
          <li class="student-item ">
            <div class="student-details">
-              <img class="avatar" src=${list[i].picture.medium}
+              <img class="avatar" src=${list[i].picture.medium}>
                <h3>${list[i].name.first} ${list[i].name.last}</h3>
             <span class="email">${list[i].email}</span>
             </div >
