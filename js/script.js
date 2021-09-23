@@ -19,6 +19,21 @@ For assistance:
 Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
+   
+const sBar = document.querySelector('.header');
+sBar.insertAdjacentHTML("beforeend", `<label for="search" class="student-search">
+   <span>Search by name</span>
+   <input id="search" placeholder="Search by name...">
+   <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+ </label>`) ;
+
+ 
+ const search = document.querySelector('.student-search button');
+ const input = document.getElementById('search');
+
+
+
+
 function showPage(list, page) {
 
    //variables to measure beginning and end of index based on 10 items per page.
@@ -53,6 +68,20 @@ function showPage(list, page) {
 
 
    }
+
+   search.addEventListener('submit', (e)=> {
+      e.preventDefault();
+       
+      searchBar(input, data);
+ 
+       console.log('submit button is functional');
+       
+      });
+
+   input.addEventListener("keyup", ()=> {
+         searchBar(input, data);
+         
+       })
 
 }
 
@@ -93,7 +122,31 @@ function addPagination(list) {
    })
 }
 
+//
 
+
+
+ function searchBar(nameSearched, list){
+
+   
+const results = [];
+ 
+
+   for(let i = 0; i< list.length; i++){
+      
+      if(nameSearched.value.length !==0 && list[i].name.first.includes(nameSearched.value.toLowerCase()) || list[i].name.last.includes(nameSearched.value.toLowerCase())){
+         results.push(list[i]);
+         
+      }
+   }
+         showPage(results, 1);
+         addPagination(results);
+
+}
+     
+
+ 
 // Call functions
 showPage(data, 1);
 addPagination(data);
+//searchBar(input, data)
