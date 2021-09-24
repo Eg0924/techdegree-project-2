@@ -68,7 +68,8 @@ function showPage(list, page) {
 
 
    }
-
+   
+   //This event listener calls the search bar function that calls the showPage function with the results of the search.
    search.addEventListener("click", (e)=> {
       e.preventDefault();
        
@@ -77,7 +78,7 @@ function showPage(list, page) {
        console.log('submit button is functional');
        
       });
-
+// This event listener narrows the search as the user enter letters of the name
    input.addEventListener("keyup", ()=> {
          searchBar(input, data);
          
@@ -125,7 +126,10 @@ function addPagination(list) {
 //
 
 
-
+//This function gives functionality to the search component.
+// It loops through the data array object properties first and last name and checks for a match in the user input while converting the input to lower case.
+//When a match occurs, it sends the matching objects into a new array and calls ShowPage and addPagination on the new array.
+// It also checks for no matches by looking at whether the new array is empty and produces a message.
  function searchBar(nameSearched, list){
 
 const message = document.querySelector('.student-list');   
