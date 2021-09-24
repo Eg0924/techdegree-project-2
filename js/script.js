@@ -69,8 +69,8 @@ function showPage(list, page) {
 
    }
 
-   search.addEventListener('submit', (e)=> {
-      e.preventDefault();
+   search.addEventListener("click", ()=> {
+      
        
       searchBar(input, data);
  
@@ -128,19 +128,24 @@ function addPagination(list) {
 
  function searchBar(nameSearched, list){
 
-   
+const message = document.querySelector('.student-list');   
 const results = [];
  
 
    for(let i = 0; i< list.length; i++){
       
-      if(nameSearched.value.length !==0 && list[i].name.first.includes(nameSearched.value.toLowerCase()) || list[i].name.last.includes(nameSearched.value.toLowerCase())){
+      if(nameSearched.value.length !==0 && list[i].name.first.toLowerCase().includes(nameSearched.value.toLowerCase()) || list[i].name.last.toLowerCase().includes(nameSearched.value.toLowerCase())){
          results.push(list[i]);
-         
       }
    }
+      if(results.length ===0){
+         message.innerHTML =  `<h3>No results were found</h3>`;
+         
+      } else{
          showPage(results, 1);
          addPagination(results);
+      }
+      
 
 }
      
