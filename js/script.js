@@ -69,8 +69,8 @@ function showPage(list, page) {
 
    }
 
-   search.addEventListener("click", ()=> {
-      
+   search.addEventListener("click", (e)=> {
+      e.preventDefault();
        
       searchBar(input, data);
  
