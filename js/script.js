@@ -8,7 +8,7 @@ FSJS Project 2 - Data Pagination and Filtering
 /*
 For assistance:
    Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
+   Reach out in your Slack community: https://treehouse-fsjs-92.slack.com/app_redirect?channel=unit-2
 */
 
 
@@ -36,9 +36,9 @@ sBar.insertAdjacentHTML("beforeend", `<label for="search" class="student-search"
 
 function showPage(list, page) {
 
-   //variables to measure beginning and end of index based on 10 items per page.
-   const startIndex = (page * 10) - 10;
-   const endIndex = page * 10;
+   //variables to measure beginning and end of index based on 9 items per page.
+   const startIndex = (page * 9) - 9;
+   const endIndex = page * 9;
 
    // Selecting the UL element with a class 'student-list
    const studentList = document.querySelector('.student-list');
@@ -91,7 +91,7 @@ Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
 function addPagination(list) {
-   const numOfPages = Math.ceil(list.length / 10);
+   const numOfPages = Math.ceil(list.length / 9);
    const linkList = document.querySelector('.link-list');
    linkList.innerHTML = "";
 
@@ -106,15 +106,18 @@ function addPagination(list) {
        </li>`;
 
       linkList.insertAdjacentHTML('beforeend', button);
+      
    }
+   //Selection of first Pagination button and setting its classname to "Active"
+   let button1 = document.querySelectorAll('button');
+   button1[1].className = "active";
+   
 
-      button = document.querySelector('button');
-      button.className = "active";
-
+   // This listener runs when the user clicks one of the page buttons at the botton of the page and changes the className for that page to active.
    linkList.addEventListener("click", (e) => {
       if (e.target.tagName == "BUTTON") {
-         button = document.querySelector('.active');
-         button.className = "";
+         button1 = document.querySelector('.active');
+         button1.className = "";
          e.target.className = 'active';
          showPage(list, e.target.textContent);
 
@@ -130,18 +133,24 @@ function addPagination(list) {
 // It loops through the data array object properties first and last name and checks for a match in the user input while converting the input to lower case.
 //When a match occurs, it sends the matching objects into a new array and calls ShowPage and addPagination on the new array.
 // It also checks for no matches by looking at whether the new array is empty and produces a message.
+
+
+//Search bar function uses an empty array to store student objects when the if condition is met. The results array gets passed ads a parameter for the showPage and addPagination functions. 
  function searchBar(nameSearched, list){
 
 const message = document.querySelector('.student-list');   
 const results = [];
  
-
+// Looping over the data array to compare the input data with the first and last name on every object in the data array.
    for(let i = 0; i< list.length; i++){
       
       if(nameSearched.value.length !==0 && list[i].name.first.toLowerCase().includes(nameSearched.value.toLowerCase()) || list[i].name.last.toLowerCase().includes(nameSearched.value.toLowerCase())){
          results.push(list[i]);
       }
    }
+
+      //This condition checks if the new array is empty(no search reuslts found.)
+      //It then pints a message explainning that no  results   were found.                                                                                                                                              
       if(results.length ===0){
          message.innerHTML =  `<h3>No results were found</h3>`;
          
