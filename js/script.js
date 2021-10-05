@@ -175,7 +175,7 @@ const results = [];
       } else{
       showPage(results, 1);
       addPagination(results);
-      document.querySelector('.pagination').style.display = 'inline';
+      document.querySelector('.pagination').style.display = 'block';
       }
    
    
