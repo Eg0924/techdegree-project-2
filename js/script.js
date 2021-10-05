@@ -30,7 +30,7 @@ sBar.insertAdjacentHTML("beforeend", `<label for="search" class="student-search"
  
  const search = document.querySelector('.student-search button');
  const input = document.getElementById('search');
-
+ 
 
 
 
@@ -39,6 +39,8 @@ function showPage(list, page) {
    //variables to measure beginning and end of index based on 9 items per page.
    const startIndex = (page * 9) - 9;
    const endIndex = page * 9;
+
+   
 
    // Selecting the UL element with a class 'student-list
    const studentList = document.querySelector('.student-list');
@@ -70,8 +72,8 @@ function showPage(list, page) {
    }
    
    //This event listener calls the search bar function that calls the showPage function with the results of the search.
-   search.addEventListener("click", (e)=> {
-      e.preventDefault();
+   search.addEventListener("click", ()=> {
+      
        
       searchBar(input, data);
  
@@ -79,10 +81,17 @@ function showPage(list, page) {
        
       });
 // This event listener narrows the search as the user enter letters of the name
-   input.addEventListener("keyup", ()=> {
-         searchBar(input, data);
+   input.addEventListener("keyup", (e)=> {
+      const searchValue = e.target.value.toLowerCase();
+      
+        console.log(searchValue) ;
+      
+              
+      searchBar(searchValue, data);
+       
          
-       })
+       });
+      
 
 }
 
@@ -136,32 +145,42 @@ function addPagination(list) {
 
 
 //Search bar function uses an empty array to store student objects when the if condition is met. The results array gets passed ads a parameter for the showPage and addPagination functions. 
- function searchBar(nameSearched, list){
 
+ function searchBar(nameSearched, list){
+   
 const message = document.querySelector('.student-list');   
 const results = [];
- 
+
+
 // Looping over the data array to compare the input data with the first and last name on every object in the data array.
    for(let i = 0; i< list.length; i++){
       
-      if(nameSearched.value.length !==0 && list[i].name.first.toLowerCase().includes(nameSearched.value.toLowerCase()) || list[i].name.last.toLowerCase().includes(nameSearched.value.toLowerCase())){
+      
+      if(nameSearched.length !== 0 && list[i].name.first.toLowerCase().includes(nameSearched) || list[i].name.last.toLowerCase().includes(nameSearched)){
          results.push(list[i]);
-      }
-   }
-
-      //This condition checks if the new array is empty(no search reuslts found.)
-      //It then pints a message explainning that no  results   were found.                                                                                                                                              
-      if(results.length ===0){
-         message.innerHTML =  `<h3>No results were found</h3>`;
          
-      } else{
-         showPage(results, 1);
-         addPagination(results);
       }
       
+      //This condition checks if the new array is empty(no search results found.)
+      //It then prints a message explaining that no results were found and hides the pagination div.                                                                     
+      
+   }
 
-}
-     
+
+      if(results.length ===0){
+         
+         message.innerHTML =  `<h3>No results were found</h3>`;
+         document.querySelector('.pagination').style.display = 'none';
+         
+      } else{
+      showPage(results, 1);
+      addPagination(results);
+      document.querySelector('.pagination').style.display = 'inline';
+      }
+   
+   
+
+}    
 
  
 // Call functions
